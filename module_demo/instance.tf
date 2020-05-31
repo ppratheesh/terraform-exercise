@@ -1,8 +1,8 @@
 module "NetworkModule" {
-    source = "./module/Network" 
+    source = "../module/Network" 
 }
 module "sgmodule"{
-    source = "./module/sg"
+    source = "../module/sg"
     vpc = module.NetworkModule.vpc_id
 }
 resource "aws_instance" "web_dev" {
