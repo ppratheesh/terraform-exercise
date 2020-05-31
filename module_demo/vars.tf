@@ -5,4 +5,4 @@ variable "AMIS" {
         us-east-1 = "ami-046842448f9e74e7d"
     }
 }
-
+variable "PUBLIC_KEY" { default = "mykey.pub" } 
