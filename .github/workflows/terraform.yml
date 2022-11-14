@@ -50,10 +50,6 @@ jobs:
         id: plan
         run: |
           terraform plan 
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
-        id: apply
-        run: terraform apply -auto-approve -input=false
      
       - name: Create Release
         id: create_release
