@@ -3,11 +3,11 @@ variable AWS_ACCESS_KEY {}
 variable AWS_SECRET_KEY {}
 */
 variable AWS_REGION {
-default = "us-east-1"
+default = "ap-south-1"
 }
 variable AMIS {
 type = map
 default ={
-  us-east-1 = "ami-046842448f9e74e7d"
+  ap-south-1 = "ami-0f2e255ec956ade7f"
  }
 }
