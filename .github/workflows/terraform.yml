@@ -48,7 +48,8 @@ jobs:
         run: |
           terraform plan 
         
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
 
