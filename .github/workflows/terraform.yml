@@ -6,7 +6,7 @@ on:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Terraformm'
     runs-on: ubuntu-latest
     environment: production
     defaults:
