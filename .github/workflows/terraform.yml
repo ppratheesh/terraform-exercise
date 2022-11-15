@@ -48,8 +48,10 @@ jobs:
         run: |
           terraform plan 
         
-      - name: release
-        uses: ncipollo/release-action@v1
+      - name: Generate release
+        id: release
+        uses: home-furnishing-nordic/semver-release-manager@master
         with:
-          tag: V.${{ github.run_number }}
+        # secret github token, required
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
 
