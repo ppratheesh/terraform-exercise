@@ -2,9 +2,7 @@ name: "Terraform"
 on:
   pull_request:
     types: [closed]
-  workflow_dispatch:
     
-
 jobs:
   terraform:
     name: 'Terraform'
@@ -54,6 +52,5 @@ jobs:
         if: github.event.pull_request.merged
         uses: home-furnishing-nordic/semver-release-manager@master
         with:
-          release_branch: master
           github_token: "${{ secrets.GITHUB_TOKEN }}"
 
