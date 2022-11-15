@@ -28,7 +28,7 @@ jobs:
         with:
           terraform_wrapper: false
 
-      - name: Terraform fmtt
+      - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
         continue-on-error: true
