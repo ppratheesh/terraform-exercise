@@ -1,1 +1,53 @@
-demo
+name: "Terraform"
+on:
+  push:
+    branches: [ "master" ]
+    
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        shell: bash
+        working-directory: demo-1
+    
+    env:
+         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         AWS_DEFAULT_REGION: ap-south-1
+    
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+      
+      - name: Terraform Init
+        id: init
+        run: |
+           rm -rf .terraform
+           terraform init 
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan -input=false
+        id: plan
+        run: |
+          terraform plan 
+        
+      - name: release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: V.${{ github.run_number }}
