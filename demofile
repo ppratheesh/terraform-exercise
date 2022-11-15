@@ -47,7 +47,10 @@ jobs:
         run: |
           terraform plan 
         
-      - name: release
-        uses: ncipollo/release-action@v1
+      - name: Release
+        uses: K-Phoen/semver-release-action@master
         with:
-          tag: V.${{ github.run_number }}
+          release_branch: master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
