@@ -47,10 +47,10 @@ jobs:
         run: |
           terraform plan 
         
-      - name: Generate release
-        id: release
-        if: github.event.pull_request.merged
-        uses: home-furnishing-nordic/semver-release-manager@master
-        with:
+      - name: Release
+        uses: K-Phoen/semver-release-action@master
+        with: 
+         release_branch: master
+        env:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
 
