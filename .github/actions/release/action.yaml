@@ -1,0 +1,38 @@
+name: "release Workflow"
+description: "create release"
+
+inputs:
+  RELEASE_BRANCH: 
+    description: "release branch"
+    required: true
+
+  GITHUB_TOKEN:
+     description: "token"
+     required: true
+
+runs:
+  using: "composite"
+  steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Release
+        uses: K-Phoen/semver-release-action@master
+        with:
+         release_branch: ${{ inputs.RELEASE_BRANCH }}
+        env:
+          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+
